@@ -1,0 +1,129 @@
+#!/bin/bash
+
+# TopMeteo Bot Startup Script
+# This script provides convenient commands for managing the meteo bot
+
+METEO_BOT_HOME="{{ meteo_bot_home }}"
+SCRIPTS_DIR="$METEO_BOT_HOME/scripts"
+VENV_DIR="$METEO_BOT_HOME/venv"
+DATA_DIR="$METEO_BOT_HOME/data"
+LOGS_DIR="$METEO_BOT_HOME/logs"
+
+# Function to check if service is running
+check_service() {
+    local service_name=$1
+    if systemctl is-active --quiet $service_name; then
+        echo "✅ $service_name is running"
+        return 0
+    else
+        echo "❌ $service_name is not running"
+        return 1
+    fi
+}
+
+# Function to show status
+status() {
+    echo "=== TopMeteo Bot Status ==="
+    check_service telegram-bot
+    echo ""
+    echo "=== Recent Logs ==="
+    if [ -f "$LOGS_DIR/bot.log" ]; then
+        tail -n 10 "$LOGS_DIR/bot.log"
+    else
+        echo "No bot logs found"
+    fi
+    echo ""
+    echo "=== Data Directory ==="
+    ls -la "$DATA_DIR"
+    echo ""
+    echo "=== Cron Jobs ==="
+    crontab -l | grep meteo || echo "No meteo cron jobs found"
+}
+
+# Function to run crawler manually
+crawl() {
+    echo "Running meteo crawler manually..."
+    cd "$SCRIPTS_DIR"
+    "$VENV_DIR/bin/python" meteo_crawler.py
+}
+
+# Function to restart bot
+restart_bot() {
+    echo "Restarting telegram bot..."
+    sudo systemctl restart telegram-bot
+    sleep 2
+    check_service telegram-bot
+}
+
+# Function to show logs
+logs() {
+    local service=${1:-bot}
+    case $service in
+        bot)
+            if [ -f "$LOGS_DIR/bot.log" ]; then
+                tail -f "$LOGS_DIR/bot.log"
+            else
+                echo "No bot logs found"
+            fi
+            ;;
+        crawler)
+            if [ -f "$LOGS_DIR/crawler.log" ]; then
+                tail -f "$LOGS_DIR/crawler.log"
+            else
+                echo "No crawler logs found"
+            fi
+            ;;
+        systemd)
+            journalctl -u telegram-bot -f
+            ;;
+        *)
+            echo "Usage: $0 logs [bot|crawler|systemd]"
+            ;;
+    esac
+}
+
+# Function to show help
+help() {
+    echo "TopMeteo Bot Management Script"
+    echo ""
+    echo "Usage: $0 [command]"
+    echo ""
+    echo "Commands:"
+    echo "  status     - Show bot status and recent logs"
+    echo "  crawl      - Run crawler manually"
+    echo "  restart    - Restart telegram bot"
+    echo "  logs       - Show logs (default: bot)"
+    echo "  logs bot   - Show bot logs"
+    echo "  logs crawler - Show crawler logs"
+    echo "  logs systemd - Show systemd logs"
+    echo "  help       - Show this help"
+    echo ""
+    echo "Examples:"
+    echo "  $0 status"
+    echo "  $0 crawl"
+    echo "  $0 logs crawler"
+}
+
+# Main script logic
+case "${1:-help}" in
+    status)
+        status
+        ;;
+    crawl)
+        crawl
+        ;;
+    restart)
+        restart_bot
+        ;;
+    logs)
+        logs $2
+        ;;
+    help|--help|-h)
+        help
+        ;;
+    *)
+        echo "Unknown command: $1"
+        help
+        exit 1
+        ;;
+esac 

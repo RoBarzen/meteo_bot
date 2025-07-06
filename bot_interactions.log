@@ -1,0 +1,579 @@
+2025-07-06 22:20:34,722 - __main__ - INFO - Starting TopMeteo Forecast Bot
+2025-07-06 22:20:34,792 - __main__ - INFO - Bot handlers registered, starting polling...
+2025-07-06 22:20:34,861 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getMe "HTTP/1.1 200 OK"
+2025-07-06 22:20:34,879 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/deleteWebhook "HTTP/1.1 200 OK"
+2025-07-06 22:20:34,880 - telegram.ext.Application - INFO - Application started
+2025-07-06 22:20:44,978 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:20:47,803 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:20:47,805 - __main__ - INFO - ACTION: button_handler | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Button pressed: show_forecast
+2025-07-06 22:20:47,986 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/answerCallbackQuery "HTTP/1.1 200 OK"
+2025-07-06 22:20:47,988 - __main__ - INFO - ACTION: show_days | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Callback query: show_forecast
+2025-07-06 22:20:47,988 - __main__ - INFO - Available days found: [0, 1, 2, 3, 4, 5]
+2025-07-06 22:20:47,989 - __main__ - INFO - Updating menu message. Old ID: None, Chat ID: 847500265
+2025-07-06 22:20:48,065 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/sendMessage "HTTP/1.1 200 OK"
+2025-07-06 22:20:48,068 - __main__ - INFO - Created new menu message with ID: 33
+2025-07-06 22:20:57,918 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:21:01,606 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:21:01,613 - __main__ - INFO - ACTION: button_handler | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Button pressed: day_1
+2025-07-06 22:21:01,705 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/answerCallbackQuery "HTTP/1.1 200 OK"
+2025-07-06 22:21:01,707 - __main__ - INFO - ACTION: show_forecast_types | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Day selected: 1 (Morgen)
+2025-07-06 22:21:01,709 - __main__ - INFO - Available forecast types for day 1: ['flugdistanz', 'thermikkarte']
+2025-07-06 22:21:01,709 - __main__ - INFO - Updating menu message. Old ID: 33, Chat ID: 847500265
+2025-07-06 22:21:01,764 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/deleteMessage "HTTP/1.1 200 OK"
+2025-07-06 22:21:01,765 - __main__ - INFO - Deleted old menu message ID: 33
+2025-07-06 22:21:01,822 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/sendMessage "HTTP/1.1 200 OK"
+2025-07-06 22:21:01,823 - __main__ - INFO - Created new menu message with ID: 34
+2025-07-06 22:21:04,493 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:21:04,498 - __main__ - INFO - ACTION: button_handler | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Button pressed: type_1_flugdistanz
+2025-07-06 22:21:04,534 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/answerCallbackQuery "HTTP/1.1 200 OK"
+2025-07-06 22:21:04,535 - __main__ - INFO - ACTION: show_hours_or_send_flugdistanz | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Forecast type selected: flugdistanz for day 1
+2025-07-06 22:21:04,535 - __main__ - INFO - Sending Flugdistanz directly for day 1
+2025-07-06 22:21:04,536 - __main__ - INFO - ACTION: send_flugdistanz_image | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Attempting to send Flugdistanz for day 1
+2025-07-06 22:21:04,658 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/sendPhoto "HTTP/1.1 200 OK"
+2025-07-06 22:21:04,660 - __main__ - INFO - Successfully sent Flugdistanz image for day 1
+2025-07-06 22:21:04,661 - __main__ - INFO - Updating menu message. Old ID: 34, Chat ID: 847500265
+2025-07-06 22:21:04,692 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/deleteMessage "HTTP/1.1 200 OK"
+2025-07-06 22:21:04,693 - __main__ - INFO - Deleted old menu message ID: 34
+2025-07-06 22:21:04,737 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/sendMessage "HTTP/1.1 200 OK"
+2025-07-06 22:21:04,740 - __main__ - INFO - Created new menu message with ID: 36
+2025-07-06 22:21:14,535 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:21:24,575 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:21:34,611 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:21:44,648 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:21:54,687 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:22:04,733 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:22:14,769 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:22:24,809 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:22:34,847 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:22:44,888 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:22:54,929 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:23:04,967 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:23:15,056 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:23:25,093 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:23:35,129 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:23:45,166 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:23:55,201 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:24:05,240 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:24:15,276 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:24:25,316 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:24:35,350 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:24:45,386 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:24:55,424 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:25:05,463 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:25:15,507 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:25:25,543 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:25:35,581 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:25:45,622 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:25:55,663 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:26:05,700 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:26:15,740 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:26:25,778 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:26:34,340 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:26:34,342 - __main__ - INFO - ACTION: start_command | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: User started the bot
+2025-07-06 22:26:34,342 - __main__ - INFO - ACTION: get_or_create_menu_message | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Attempting to get/create menu message
+2025-07-06 22:26:34,523 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getChat "HTTP/1.1 200 OK"
+2025-07-06 22:26:34,525 - __main__ - INFO - Using existing menu message ID: 36
+2025-07-06 22:26:44,376 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:26:54,415 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:26:54,524 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:26:54,530 - __main__ - INFO - ACTION: button_handler | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Button pressed: show_forecast
+2025-07-06 22:26:54,644 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/answerCallbackQuery "HTTP/1.1 200 OK"
+2025-07-06 22:26:54,646 - __main__ - INFO - ACTION: show_days | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Callback query: show_forecast
+2025-07-06 22:26:54,647 - __main__ - INFO - Available days found: [0, 1, 2, 3, 4, 5]
+2025-07-06 22:26:54,648 - __main__ - INFO - Updating menu message. Old ID: 36, Chat ID: 847500265
+2025-07-06 22:26:54,709 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/deleteMessage "HTTP/1.1 200 OK"
+2025-07-06 22:26:54,711 - __main__ - INFO - Deleted old menu message ID: 36
+2025-07-06 22:26:54,790 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/sendMessage "HTTP/1.1 200 OK"
+2025-07-06 22:26:54,792 - __main__ - INFO - Created new menu message with ID: 38
+2025-07-06 22:26:58,488 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:26:58,492 - __main__ - INFO - ACTION: button_handler | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Button pressed: main_menu
+2025-07-06 22:26:58,520 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/answerCallbackQuery "HTTP/1.1 200 OK"
+2025-07-06 22:26:58,521 - __main__ - INFO - ACTION: main_menu | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: User returned to main menu
+2025-07-06 22:26:58,521 - __main__ - INFO - Updating menu message. Old ID: 38, Chat ID: 847500265
+2025-07-06 22:26:58,548 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/deleteMessage "HTTP/1.1 200 OK"
+2025-07-06 22:26:58,550 - __main__ - INFO - Deleted old menu message ID: 38
+2025-07-06 22:26:58,593 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/sendMessage "HTTP/1.1 200 OK"
+2025-07-06 22:26:58,596 - __main__ - INFO - Created new menu message with ID: 39
+2025-07-06 22:27:02,179 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:27:02,180 - __main__ - INFO - ACTION: button_handler | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Button pressed: show_forecast
+2025-07-06 22:27:02,248 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/answerCallbackQuery "HTTP/1.1 200 OK"
+2025-07-06 22:27:02,251 - __main__ - INFO - ACTION: show_days | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Callback query: show_forecast
+2025-07-06 22:27:02,251 - __main__ - INFO - Available days found: [0, 1, 2, 3, 4, 5]
+2025-07-06 22:27:02,251 - __main__ - INFO - Updating menu message. Old ID: 39, Chat ID: 847500265
+2025-07-06 22:27:02,320 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/deleteMessage "HTTP/1.1 200 OK"
+2025-07-06 22:27:02,321 - __main__ - INFO - Deleted old menu message ID: 39
+2025-07-06 22:27:02,409 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/sendMessage "HTTP/1.1 200 OK"
+2025-07-06 22:27:02,412 - __main__ - INFO - Created new menu message with ID: 40
+2025-07-06 22:27:04,337 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:27:04,342 - __main__ - INFO - ACTION: button_handler | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Button pressed: day_1
+2025-07-06 22:27:04,507 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/answerCallbackQuery "HTTP/1.1 200 OK"
+2025-07-06 22:27:04,509 - __main__ - INFO - ACTION: show_forecast_types | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Day selected: 1 (Morgen)
+2025-07-06 22:27:04,510 - __main__ - INFO - Available forecast types for day 1: ['flugdistanz', 'thermikkarte']
+2025-07-06 22:27:04,511 - __main__ - INFO - Updating menu message. Old ID: 40, Chat ID: 847500265
+2025-07-06 22:27:04,661 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/deleteMessage "HTTP/1.1 200 OK"
+2025-07-06 22:27:04,662 - __main__ - INFO - Deleted old menu message ID: 40
+2025-07-06 22:27:04,809 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/sendMessage "HTTP/1.1 200 OK"
+2025-07-06 22:27:04,813 - __main__ - INFO - Created new menu message with ID: 41
+2025-07-06 22:27:06,748 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:27:06,752 - __main__ - INFO - ACTION: button_handler | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Button pressed: type_1_flugdistanz
+2025-07-06 22:27:06,843 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/answerCallbackQuery "HTTP/1.1 200 OK"
+2025-07-06 22:27:06,845 - __main__ - INFO - ACTION: show_hours_or_send_flugdistanz | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Forecast type selected: flugdistanz for day 1
+2025-07-06 22:27:06,846 - __main__ - INFO - Sending Flugdistanz directly for day 1
+2025-07-06 22:27:06,846 - __main__ - INFO - ACTION: send_flugdistanz_image | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Attempting to send Flugdistanz for day 1
+2025-07-06 22:27:07,058 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/sendPhoto "HTTP/1.1 200 OK"
+2025-07-06 22:27:07,061 - __main__ - INFO - Successfully sent Flugdistanz image for day 1
+2025-07-06 22:27:07,061 - __main__ - INFO - Updating menu message. Old ID: 41, Chat ID: 847500265
+2025-07-06 22:27:07,161 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/deleteMessage "HTTP/1.1 200 OK"
+2025-07-06 22:27:07,162 - __main__ - INFO - Deleted old menu message ID: 41
+2025-07-06 22:27:07,285 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/sendMessage "HTTP/1.1 200 OK"
+2025-07-06 22:27:07,286 - __main__ - INFO - Created new menu message with ID: 43
+2025-07-06 22:27:09,887 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:27:09,892 - __main__ - INFO - ACTION: button_handler | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Button pressed: show_forecast
+2025-07-06 22:27:09,929 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/answerCallbackQuery "HTTP/1.1 200 OK"
+2025-07-06 22:27:09,931 - __main__ - INFO - ACTION: show_days | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Callback query: show_forecast
+2025-07-06 22:27:09,932 - __main__ - INFO - Available days found: [0, 1, 2, 3, 4, 5]
+2025-07-06 22:27:09,933 - __main__ - INFO - Updating menu message. Old ID: 43, Chat ID: 847500265
+2025-07-06 22:27:09,966 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/deleteMessage "HTTP/1.1 200 OK"
+2025-07-06 22:27:09,967 - __main__ - INFO - Deleted old menu message ID: 43
+2025-07-06 22:27:10,012 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/sendMessage "HTTP/1.1 200 OK"
+2025-07-06 22:27:10,014 - __main__ - INFO - Created new menu message with ID: 44
+2025-07-06 22:27:19,932 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:27:29,974 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:27:40,015 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:27:48,391 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:27:48,396 - __main__ - INFO - ACTION: button_handler | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Button pressed: main_menu
+2025-07-06 22:27:48,499 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/answerCallbackQuery "HTTP/1.1 200 OK"
+2025-07-06 22:27:48,501 - __main__ - INFO - ACTION: main_menu | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: User returned to main menu
+2025-07-06 22:27:48,501 - __main__ - INFO - Updating menu message. Old ID: 44, Chat ID: 847500265
+2025-07-06 22:27:48,536 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/deleteMessage "HTTP/1.1 200 OK"
+2025-07-06 22:27:48,538 - __main__ - INFO - Deleted old menu message ID: 44
+2025-07-06 22:27:48,587 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/sendMessage "HTTP/1.1 200 OK"
+2025-07-06 22:27:48,590 - __main__ - INFO - Created new menu message with ID: 45
+2025-07-06 22:27:58,435 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:28:08,473 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:28:18,513 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:28:28,552 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:28:38,594 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:28:48,632 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:28:58,671 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:29:08,712 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:29:18,748 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:29:28,783 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:29:38,821 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:29:48,856 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:29:58,892 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:30:08,949 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:30:18,988 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:30:29,025 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:30:39,062 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:30:49,101 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:30:59,136 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:31:09,171 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:31:19,209 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:31:29,246 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:31:39,286 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:31:49,324 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:31:59,365 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:32:09,406 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:32:19,443 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:33:07,191 - __main__ - INFO - Starting TopMeteo Forecast Bot
+2025-07-06 22:33:07,261 - __main__ - INFO - Bot handlers registered, starting polling...
+2025-07-06 22:33:07,384 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getMe "HTTP/1.1 200 OK"
+2025-07-06 22:33:07,424 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/deleteWebhook "HTTP/1.1 200 OK"
+2025-07-06 22:33:07,429 - telegram.ext.Application - INFO - Application started
+2025-07-06 22:33:10,431 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:33:10,433 - __main__ - INFO - ACTION: button_handler | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Button pressed: show_forecast
+2025-07-06 22:33:10,487 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/answerCallbackQuery "HTTP/1.1 200 OK"
+2025-07-06 22:33:10,488 - __main__ - INFO - ACTION: show_days | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Callback query: show_forecast
+2025-07-06 22:33:10,488 - __main__ - INFO - Available days found: [0, 1, 2, 3, 4, 5]
+2025-07-06 22:33:10,488 - __main__ - INFO - Updating menu message. Old ID: None, Chat ID: 847500265
+2025-07-06 22:33:10,566 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/sendMessage "HTTP/1.1 200 OK"
+2025-07-06 22:33:10,567 - __main__ - INFO - Created new menu message with ID: 46
+2025-07-06 22:33:13,279 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:33:13,282 - __main__ - INFO - ACTION: button_handler | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Button pressed: main_menu
+2025-07-06 22:33:13,421 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/answerCallbackQuery "HTTP/1.1 200 OK"
+2025-07-06 22:33:13,422 - __main__ - INFO - ACTION: main_menu | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: User returned to main menu
+2025-07-06 22:33:13,422 - __main__ - INFO - Updating menu message. Old ID: 46, Chat ID: 847500265
+2025-07-06 22:33:13,532 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/deleteMessage "HTTP/1.1 200 OK"
+2025-07-06 22:33:13,534 - __main__ - INFO - Deleted old menu message ID: 46
+2025-07-06 22:33:13,658 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/sendMessage "HTTP/1.1 200 OK"
+2025-07-06 22:33:13,659 - __main__ - INFO - Created new menu message with ID: 47
+2025-07-06 22:33:14,643 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:33:14,649 - __main__ - INFO - ACTION: button_handler | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Button pressed: show_forecast
+2025-07-06 22:33:14,690 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/answerCallbackQuery "HTTP/1.1 200 OK"
+2025-07-06 22:33:14,691 - __main__ - INFO - ACTION: show_days | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Callback query: show_forecast
+2025-07-06 22:33:14,691 - __main__ - INFO - Available days found: [0, 1, 2, 3, 4, 5]
+2025-07-06 22:33:14,692 - __main__ - INFO - Updating menu message. Old ID: 47, Chat ID: 847500265
+2025-07-06 22:33:14,734 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/deleteMessage "HTTP/1.1 200 OK"
+2025-07-06 22:33:14,735 - __main__ - INFO - Deleted old menu message ID: 47
+2025-07-06 22:33:14,787 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/sendMessage "HTTP/1.1 200 OK"
+2025-07-06 22:33:14,788 - __main__ - INFO - Created new menu message with ID: 48
+2025-07-06 22:33:18,614 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:33:18,615 - __main__ - INFO - ACTION: button_handler | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Button pressed: day_1
+2025-07-06 22:33:18,660 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/answerCallbackQuery "HTTP/1.1 200 OK"
+2025-07-06 22:33:18,660 - __main__ - INFO - ACTION: show_forecast_types | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Day selected: 1 (Morgen)
+2025-07-06 22:33:18,661 - __main__ - INFO - Available forecast types for day 1: ['flugdistanz', 'thermikkarte', 'ortsvorhersage']
+2025-07-06 22:33:18,661 - __main__ - INFO - Updating menu message. Old ID: 48, Chat ID: 847500265
+2025-07-06 22:33:18,710 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/deleteMessage "HTTP/1.1 200 OK"
+2025-07-06 22:33:18,711 - __main__ - INFO - Deleted old menu message ID: 48
+2025-07-06 22:33:18,809 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/sendMessage "HTTP/1.1 200 OK"
+2025-07-06 22:33:18,811 - __main__ - INFO - Created new menu message with ID: 49
+2025-07-06 22:33:20,743 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:33:20,744 - __main__ - INFO - ACTION: button_handler | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Button pressed: type_1_ortsvorhersage
+2025-07-06 22:33:20,900 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/answerCallbackQuery "HTTP/1.1 200 OK"
+2025-07-06 22:33:20,901 - __main__ - INFO - ACTION: show_hours_or_send_flugdistanz | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Forecast type selected: ortsvorhersage for day 1
+2025-07-06 22:33:20,902 - __main__ - INFO - Sending ortsvorhersage directly for day 1
+2025-07-06 22:33:20,902 - __main__ - INFO - ACTION: send_ortsvorhersage_image | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Attempting to send Ortsvorhersage for day 1
+2025-07-06 22:33:21,193 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/sendPhoto "HTTP/1.1 200 OK"
+2025-07-06 22:33:21,196 - __main__ - INFO - Successfully sent Ortsvorhersage image for day 1
+2025-07-06 22:33:21,197 - __main__ - INFO - Updating menu message. Old ID: 49, Chat ID: 847500265
+2025-07-06 22:33:21,286 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/deleteMessage "HTTP/1.1 200 OK"
+2025-07-06 22:33:21,287 - __main__ - INFO - Deleted old menu message ID: 49
+2025-07-06 22:33:21,370 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/sendMessage "HTTP/1.1 200 OK"
+2025-07-06 22:33:21,371 - __main__ - INFO - Created new menu message with ID: 51
+2025-07-06 22:33:30,768 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:33:40,800 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:33:50,824 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:34:00,842 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:34:05,878 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:34:05,879 - telegram.ext.Application - INFO - Application is stopping. This might take a moment.
+2025-07-06 22:34:05,879 - telegram.ext.Application - INFO - Application.stop() complete
+2025-07-06 22:35:13,135 - __main__ - INFO - Starting TopMeteo Forecast Bot
+2025-07-06 22:35:13,202 - __main__ - INFO - Bot handlers registered, starting polling...
+2025-07-06 22:35:13,309 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getMe "HTTP/1.1 200 OK"
+2025-07-06 22:35:13,340 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/deleteWebhook "HTTP/1.1 200 OK"
+2025-07-06 22:35:13,341 - telegram.ext.Application - INFO - Application started
+2025-07-06 22:35:13,399 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:35:13,401 - __main__ - INFO - ACTION: button_handler | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Button pressed: day_1
+2025-07-06 22:35:13,472 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/answerCallbackQuery "HTTP/1.1 200 OK"
+2025-07-06 22:35:13,474 - __main__ - INFO - ACTION: show_forecast_types | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Day selected: 1 (Morgen)
+2025-07-06 22:35:13,475 - __main__ - INFO - Available forecast types for day 1: ['flugdistanz', 'thermikkarte', 'wolkenverteilung', 'ortsvorhersage']
+2025-07-06 22:35:13,475 - __main__ - INFO - Updating menu message. Old ID: None, Chat ID: 847500265
+2025-07-06 22:35:13,543 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/sendMessage "HTTP/1.1 200 OK"
+2025-07-06 22:35:13,546 - __main__ - INFO - Created new menu message with ID: 52
+2025-07-06 22:35:16,720 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:35:16,721 - __main__ - INFO - ACTION: button_handler | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Button pressed: type_1_ortsvorhersage
+2025-07-06 22:35:16,783 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/answerCallbackQuery "HTTP/1.1 200 OK"
+2025-07-06 22:35:16,784 - __main__ - INFO - ACTION: show_hours_or_send_flugdistanz | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Forecast type selected: ortsvorhersage for day 1
+2025-07-06 22:35:16,784 - __main__ - INFO - Sending ortsvorhersage directly for day 1
+2025-07-06 22:35:16,784 - __main__ - INFO - ACTION: send_ortsvorhersage_image | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Attempting to send Ortsvorhersage for day 1
+2025-07-06 22:35:16,917 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/sendPhoto "HTTP/1.1 200 OK"
+2025-07-06 22:35:16,918 - __main__ - INFO - Successfully sent Ortsvorhersage image for day 1
+2025-07-06 22:35:16,918 - __main__ - INFO - Updating menu message. Old ID: 52, Chat ID: 847500265
+2025-07-06 22:35:16,958 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/deleteMessage "HTTP/1.1 200 OK"
+2025-07-06 22:35:16,959 - __main__ - INFO - Deleted old menu message ID: 52
+2025-07-06 22:35:17,024 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/sendMessage "HTTP/1.1 200 OK"
+2025-07-06 22:35:17,025 - __main__ - INFO - Created new menu message with ID: 54
+2025-07-06 22:35:19,817 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:35:19,822 - __main__ - INFO - ACTION: button_handler | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Button pressed: show_forecast
+2025-07-06 22:35:19,937 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/answerCallbackQuery "HTTP/1.1 200 OK"
+2025-07-06 22:35:19,939 - __main__ - INFO - ACTION: show_days | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Callback query: show_forecast
+2025-07-06 22:35:19,939 - __main__ - INFO - Available days found: [0, 1, 2, 3, 4, 5]
+2025-07-06 22:35:19,940 - __main__ - INFO - Updating menu message. Old ID: 54, Chat ID: 847500265
+2025-07-06 22:35:20,068 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/deleteMessage "HTTP/1.1 200 OK"
+2025-07-06 22:35:20,070 - __main__ - INFO - Deleted old menu message ID: 54
+2025-07-06 22:35:20,219 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/sendMessage "HTTP/1.1 200 OK"
+2025-07-06 22:35:20,220 - __main__ - INFO - Created new menu message with ID: 55
+2025-07-06 22:35:24,273 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:35:24,275 - __main__ - INFO - ACTION: button_handler | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Button pressed: day_0
+2025-07-06 22:35:24,318 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/answerCallbackQuery "HTTP/1.1 200 OK"
+2025-07-06 22:35:24,318 - __main__ - INFO - ACTION: show_forecast_types | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Day selected: 0 (Heute)
+2025-07-06 22:35:24,319 - __main__ - INFO - Available forecast types for day 0: ['flugdistanz', 'thermikkarte', 'wolkenverteilung', 'ortsvorhersage']
+2025-07-06 22:35:24,319 - __main__ - INFO - Updating menu message. Old ID: 55, Chat ID: 847500265
+2025-07-06 22:35:24,355 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/deleteMessage "HTTP/1.1 200 OK"
+2025-07-06 22:35:24,356 - __main__ - INFO - Deleted old menu message ID: 55
+2025-07-06 22:35:24,411 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/sendMessage "HTTP/1.1 200 OK"
+2025-07-06 22:35:24,411 - __main__ - INFO - Created new menu message with ID: 56
+2025-07-06 22:35:26,238 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:35:26,242 - __main__ - INFO - ACTION: button_handler | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Button pressed: type_0_ortsvorhersage
+2025-07-06 22:35:26,302 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/answerCallbackQuery "HTTP/1.1 200 OK"
+2025-07-06 22:35:26,303 - __main__ - INFO - ACTION: show_hours_or_send_flugdistanz | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Forecast type selected: ortsvorhersage for day 0
+2025-07-06 22:35:26,303 - __main__ - INFO - Sending ortsvorhersage directly for day 0
+2025-07-06 22:35:26,303 - __main__ - INFO - ACTION: send_ortsvorhersage_image | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Attempting to send Ortsvorhersage for day 0
+2025-07-06 22:35:26,939 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/sendPhoto "HTTP/1.1 200 OK"
+2025-07-06 22:35:26,941 - __main__ - INFO - Successfully sent Ortsvorhersage image for day 0
+2025-07-06 22:35:26,942 - __main__ - INFO - Updating menu message. Old ID: 56, Chat ID: 847500265
+2025-07-06 22:35:26,989 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/deleteMessage "HTTP/1.1 200 OK"
+2025-07-06 22:35:26,990 - __main__ - INFO - Deleted old menu message ID: 56
+2025-07-06 22:35:27,051 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/sendMessage "HTTP/1.1 200 OK"
+2025-07-06 22:35:27,052 - __main__ - INFO - Created new menu message with ID: 58
+2025-07-06 22:35:36,264 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:35:46,291 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:35:56,313 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:36:04,580 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:36:04,581 - telegram.ext.Application - INFO - Application is stopping. This might take a moment.
+2025-07-06 22:36:04,581 - telegram.ext.Application - INFO - Application.stop() complete
+2025-07-06 22:41:24,683 - __main__ - INFO - Starting TopMeteo Forecast Bot
+2025-07-06 22:41:24,751 - __main__ - INFO - Bot handlers registered, starting polling...
+2025-07-06 22:41:24,856 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getMe "HTTP/1.1 200 OK"
+2025-07-06 22:41:24,882 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/deleteWebhook "HTTP/1.1 200 OK"
+2025-07-06 22:41:24,883 - telegram.ext.Application - INFO - Application started
+2025-07-06 22:41:29,189 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:41:29,193 - __main__ - INFO - ACTION: button_handler | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Button pressed: day_0
+2025-07-06 22:41:29,231 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/answerCallbackQuery "HTTP/1.1 200 OK"
+2025-07-06 22:41:29,231 - __main__ - INFO - ACTION: show_forecast_types | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Day selected: 0 (Heute)
+2025-07-06 22:41:29,232 - __main__ - INFO - Available forecast types for day 0: ['flugdistanz', 'thermikkarte', 'wolkenverteilung', 'ortsvorhersage', 'pfd_summary']
+2025-07-06 22:41:29,232 - __main__ - INFO - Updating menu message. Old ID: None, Chat ID: 847500265
+2025-07-06 22:41:29,277 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/sendMessage "HTTP/1.1 200 OK"
+2025-07-06 22:41:29,280 - __main__ - INFO - Created new menu message with ID: 59
+2025-07-06 22:41:31,816 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:41:31,820 - __main__ - INFO - ACTION: button_handler | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Button pressed: type_0_pfd_summary
+2025-07-06 22:41:31,907 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/answerCallbackQuery "HTTP/1.1 200 OK"
+2025-07-06 22:41:31,909 - telegram.ext.Application - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/home/rob/.local/lib/python3.10/site-packages/telegram/ext/_application.py", line 1234, in process_update
+    await coroutine
+  File "/home/rob/.local/lib/python3.10/site-packages/telegram/ext/_basehandler.py", line 157, in handle_update
+    return await self.callback(update, context)
+  File "/home/rob/cursor_repos/meteo/telegram_bot.py", line 510, in button_handler
+    await show_hours_or_send_flugdistanz(update, context)
+  File "/home/rob/cursor_repos/meteo/telegram_bot.py", line 269, in show_hours_or_send_flugdistanz
+    _, day_num, forecast_type = query.data.split('_')
+ValueError: too many values to unpack (expected 3)
+2025-07-06 22:41:41,844 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:41:51,870 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:41:57,715 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 22:41:57,717 - telegram.ext.Application - INFO - Application is stopping. This might take a moment.
+2025-07-06 22:41:57,717 - telegram.ext.Application - INFO - Application.stop() complete
+2025-07-06 23:15:11,451 - __main__ - INFO - Starting TopMeteo Forecast Bot
+2025-07-06 23:15:11,520 - __main__ - INFO - Bot handlers registered, starting polling...
+2025-07-06 23:15:11,620 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getMe "HTTP/1.1 200 OK"
+2025-07-06 23:15:11,652 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/deleteWebhook "HTTP/1.1 200 OK"
+2025-07-06 23:15:11,657 - telegram.ext.Application - INFO - Application started
+2025-07-06 23:15:17,956 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 23:15:17,958 - __main__ - INFO - ACTION: button_handler | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Button pressed: show_days
+2025-07-06 23:15:17,958 - __main__ - WARNING - Unknown callback data: show_days
+2025-07-06 23:15:24,565 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 23:15:24,570 - __main__ - INFO - ACTION: button_handler | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Button pressed: day_0
+2025-07-06 23:15:24,648 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/answerCallbackQuery "HTTP/1.1 200 OK"
+2025-07-06 23:15:24,649 - __main__ - INFO - ACTION: show_forecast_types | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Day selected: 0 (Heute)
+2025-07-06 23:15:24,650 - __main__ - INFO - Available forecast types for day 0: ['flugdistanz', 'thermikkarte', 'wolkenverteilung', 'ortsvorhersage', 'pfd_summary']
+2025-07-06 23:15:24,651 - __main__ - INFO - Updating menu message. Old ID: None, Chat ID: 847500265
+2025-07-06 23:15:24,692 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/sendMessage "HTTP/1.1 200 OK"
+2025-07-06 23:15:24,693 - __main__ - INFO - Created new menu message with ID: 60
+2025-07-06 23:15:31,234 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 23:15:31,237 - __main__ - INFO - ACTION: button_handler | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Button pressed: type_0_pfd_summary
+2025-07-06 23:15:31,397 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/answerCallbackQuery "HTTP/1.1 200 OK"
+2025-07-06 23:15:31,398 - telegram.ext.Application - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/home/rob/.local/lib/python3.10/site-packages/telegram/ext/_application.py", line 1234, in process_update
+    await coroutine
+  File "/home/rob/.local/lib/python3.10/site-packages/telegram/ext/_basehandler.py", line 157, in handle_update
+    return await self.callback(update, context)
+  File "/home/rob/cursor_repos/meteo/telegram_bot.py", line 511, in button_handler
+    await show_hours_or_send_flugdistanz(update, context)
+  File "/home/rob/cursor_repos/meteo/telegram_bot.py", line 270, in show_hours_or_send_flugdistanz
+    _, day_num, forecast_type = query.data.split('_')
+ValueError: too many values to unpack (expected 3)
+2025-07-06 23:15:41,264 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 23:15:51,288 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 23:16:01,314 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 23:16:11,342 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 23:16:21,362 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 23:16:31,391 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 23:16:41,418 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 23:16:51,450 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 23:17:01,482 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 23:17:06,920 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 23:17:06,921 - telegram.ext.Application - INFO - Application is stopping. This might take a moment.
+2025-07-06 23:17:06,921 - telegram.ext.Application - INFO - Application.stop() complete
+2025-07-06 23:17:08,063 - __main__ - INFO - Starting TopMeteo Forecast Bot
+2025-07-06 23:17:08,132 - __main__ - INFO - Bot handlers registered, starting polling...
+2025-07-06 23:17:08,194 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getMe "HTTP/1.1 200 OK"
+2025-07-06 23:17:08,216 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/deleteWebhook "HTTP/1.1 200 OK"
+2025-07-06 23:17:08,217 - telegram.ext.Application - INFO - Application started
+2025-07-06 23:17:12,468 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 23:17:12,472 - __main__ - INFO - ACTION: button_handler | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Button pressed: show_days
+2025-07-06 23:17:12,472 - __main__ - WARNING - Unknown callback data: show_days
+2025-07-06 23:17:14,096 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 23:17:14,101 - __main__ - INFO - ACTION: button_handler | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Button pressed: day_0
+2025-07-06 23:17:14,183 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/answerCallbackQuery "HTTP/1.1 200 OK"
+2025-07-06 23:17:14,184 - __main__ - INFO - ACTION: show_forecast_types | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Day selected: 0 (Heute)
+2025-07-06 23:17:14,184 - __main__ - INFO - Available forecast types for day 0: ['flugdistanz', 'thermikkarte', 'wolkenverteilung', 'ortsvorhersage', 'pfd_summary']
+2025-07-06 23:17:14,184 - __main__ - INFO - Updating menu message. Old ID: None, Chat ID: 847500265
+2025-07-06 23:17:14,230 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/sendMessage "HTTP/1.1 200 OK"
+2025-07-06 23:17:14,231 - __main__ - INFO - Created new menu message with ID: 61
+2025-07-06 23:17:16,308 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 23:17:16,313 - __main__ - INFO - ACTION: button_handler | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Button pressed: type_0_ortsvorhersage
+2025-07-06 23:17:16,343 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/answerCallbackQuery "HTTP/1.1 200 OK"
+2025-07-06 23:17:16,345 - __main__ - INFO - ACTION: show_hours_or_send_flugdistanz | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Forecast type selected: ortsvorhersage for day 0
+2025-07-06 23:17:16,345 - __main__ - INFO - Sending ortsvorhersage directly for day 0
+2025-07-06 23:17:16,345 - __main__ - INFO - ACTION: send_ortsvorhersage_image | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Attempting to send Ortsvorhersage for day 0
+2025-07-06 23:17:16,806 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/sendPhoto "HTTP/1.1 200 OK"
+2025-07-06 23:17:16,809 - __main__ - INFO - Successfully sent Ortsvorhersage image for day 0
+2025-07-06 23:17:16,809 - __main__ - INFO - Updating menu message. Old ID: 61, Chat ID: 847500265
+2025-07-06 23:17:16,838 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/deleteMessage "HTTP/1.1 200 OK"
+2025-07-06 23:17:16,839 - __main__ - INFO - Deleted old menu message ID: 61
+2025-07-06 23:17:16,876 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/sendMessage "HTTP/1.1 200 OK"
+2025-07-06 23:17:16,877 - __main__ - INFO - Created new menu message with ID: 63
+2025-07-06 23:17:21,184 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 23:17:21,190 - __main__ - INFO - ACTION: button_handler | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Button pressed: show_forecast
+2025-07-06 23:17:21,220 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/answerCallbackQuery "HTTP/1.1 200 OK"
+2025-07-06 23:17:21,220 - __main__ - INFO - ACTION: show_days | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Callback query: show_forecast
+2025-07-06 23:17:21,220 - __main__ - INFO - Available days found: [0, 1, 2, 3, 4, 5]
+2025-07-06 23:17:21,221 - __main__ - INFO - Updating menu message. Old ID: 63, Chat ID: 847500265
+2025-07-06 23:17:21,250 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/deleteMessage "HTTP/1.1 200 OK"
+2025-07-06 23:17:21,253 - __main__ - INFO - Deleted old menu message ID: 63
+2025-07-06 23:17:21,300 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/sendMessage "HTTP/1.1 200 OK"
+2025-07-06 23:17:21,302 - __main__ - INFO - Created new menu message with ID: 64
+2025-07-06 23:17:23,670 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 23:17:23,674 - __main__ - INFO - ACTION: button_handler | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Button pressed: main_menu
+2025-07-06 23:17:23,702 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/answerCallbackQuery "HTTP/1.1 200 OK"
+2025-07-06 23:17:23,704 - __main__ - INFO - ACTION: main_menu | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: User returned to main menu
+2025-07-06 23:17:23,704 - __main__ - INFO - Updating menu message. Old ID: 64, Chat ID: 847500265
+2025-07-06 23:17:23,742 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/deleteMessage "HTTP/1.1 200 OK"
+2025-07-06 23:17:23,743 - __main__ - INFO - Deleted old menu message ID: 64
+2025-07-06 23:17:23,785 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/sendMessage "HTTP/1.1 200 OK"
+2025-07-06 23:17:23,787 - __main__ - INFO - Created new menu message with ID: 65
+2025-07-06 23:17:26,216 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 23:17:26,218 - __main__ - INFO - ACTION: button_handler | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Button pressed: show_forecast
+2025-07-06 23:17:26,247 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/answerCallbackQuery "HTTP/1.1 200 OK"
+2025-07-06 23:17:26,247 - __main__ - INFO - ACTION: show_days | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Callback query: show_forecast
+2025-07-06 23:17:26,247 - __main__ - INFO - Available days found: [0, 1, 2, 3, 4, 5]
+2025-07-06 23:17:26,247 - __main__ - INFO - Updating menu message. Old ID: 65, Chat ID: 847500265
+2025-07-06 23:17:26,279 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/deleteMessage "HTTP/1.1 200 OK"
+2025-07-06 23:17:26,280 - __main__ - INFO - Deleted old menu message ID: 65
+2025-07-06 23:17:26,328 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/sendMessage "HTTP/1.1 200 OK"
+2025-07-06 23:17:26,329 - __main__ - INFO - Created new menu message with ID: 66
+2025-07-06 23:17:30,295 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 23:17:30,300 - __main__ - INFO - ACTION: button_handler | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Button pressed: main_menu
+2025-07-06 23:17:30,339 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/answerCallbackQuery "HTTP/1.1 200 OK"
+2025-07-06 23:17:30,340 - __main__ - INFO - ACTION: main_menu | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: User returned to main menu
+2025-07-06 23:17:30,340 - __main__ - INFO - Updating menu message. Old ID: 66, Chat ID: 847500265
+2025-07-06 23:17:30,376 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/deleteMessage "HTTP/1.1 200 OK"
+2025-07-06 23:17:30,378 - __main__ - INFO - Deleted old menu message ID: 66
+2025-07-06 23:17:30,423 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/sendMessage "HTTP/1.1 200 OK"
+2025-07-06 23:17:30,425 - __main__ - INFO - Created new menu message with ID: 67
+2025-07-06 23:17:34,794 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 23:17:34,797 - __main__ - INFO - ACTION: button_handler | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Button pressed: type_0_ortsvorhersage
+2025-07-06 23:17:34,894 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/answerCallbackQuery "HTTP/1.1 200 OK"
+2025-07-06 23:17:34,896 - __main__ - INFO - ACTION: show_hours_or_send_flugdistanz | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Forecast type selected: ortsvorhersage for day 0
+2025-07-06 23:17:34,896 - __main__ - INFO - Sending ortsvorhersage directly for day 0
+2025-07-06 23:17:34,896 - __main__ - INFO - ACTION: send_ortsvorhersage_image | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Attempting to send Ortsvorhersage for day 0
+2025-07-06 23:17:35,241 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/sendPhoto "HTTP/1.1 200 OK"
+2025-07-06 23:17:35,244 - __main__ - INFO - Successfully sent Ortsvorhersage image for day 0
+2025-07-06 23:17:35,244 - __main__ - INFO - Updating menu message. Old ID: 67, Chat ID: 847500265
+2025-07-06 23:17:35,324 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/deleteMessage "HTTP/1.1 200 OK"
+2025-07-06 23:17:35,326 - __main__ - INFO - Deleted old menu message ID: 67
+2025-07-06 23:17:35,412 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/sendMessage "HTTP/1.1 200 OK"
+2025-07-06 23:17:35,414 - __main__ - INFO - Created new menu message with ID: 69
+2025-07-06 23:17:38,331 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 23:17:38,336 - __main__ - INFO - ACTION: button_handler | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Button pressed: type_0_pfd_summary
+2025-07-06 23:17:38,411 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/answerCallbackQuery "HTTP/1.1 200 OK"
+2025-07-06 23:17:38,413 - __main__ - INFO - ACTION: show_hours_or_send_flugdistanz | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Forecast type selected: pfd_summary for day 0
+2025-07-06 23:17:38,413 - __main__ - INFO - Sending PFD summary directly
+2025-07-06 23:17:38,414 - __main__ - INFO - ACTION: send_pfd_summary | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Sending PFD 18m-Klasse summary
+2025-07-06 23:17:38,491 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/sendMessage "HTTP/1.1 200 OK"
+2025-07-06 23:17:38,495 - __main__ - INFO - Successfully sent PFD 18m-Klasse summary
+2025-07-06 23:17:38,496 - __main__ - INFO - Updating menu message. Old ID: 69, Chat ID: 847500265
+2025-07-06 23:17:38,530 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/deleteMessage "HTTP/1.1 200 OK"
+2025-07-06 23:17:38,531 - __main__ - INFO - Deleted old menu message ID: 69
+2025-07-06 23:17:38,578 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/sendMessage "HTTP/1.1 200 OK"
+2025-07-06 23:17:38,579 - __main__ - INFO - Created new menu message with ID: 71
+2025-07-06 23:17:48,361 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 23:17:58,391 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 23:18:08,416 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 23:18:18,441 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 23:18:28,472 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 23:18:38,499 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 23:18:48,526 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 23:18:58,550 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 23:19:08,575 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 23:19:18,602 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 23:19:28,628 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 23:19:35,439 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 23:19:35,443 - __main__ - INFO - ACTION: button_handler | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Button pressed: pfd_summary
+2025-07-06 23:19:35,443 - __main__ - WARNING - Unknown callback data: pfd_summary
+2025-07-06 23:19:42,661 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 23:19:42,666 - __main__ - INFO - ACTION: button_handler | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Button pressed: show_forecast
+2025-07-06 23:19:42,789 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/answerCallbackQuery "HTTP/1.1 200 OK"
+2025-07-06 23:19:42,789 - __main__ - INFO - ACTION: show_days | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Callback query: show_forecast
+2025-07-06 23:19:42,790 - __main__ - INFO - Available days found: [0, 1, 2, 3, 4, 5]
+2025-07-06 23:19:42,790 - __main__ - INFO - Updating menu message. Old ID: 71, Chat ID: 847500265
+2025-07-06 23:19:42,848 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/deleteMessage "HTTP/1.1 200 OK"
+2025-07-06 23:19:42,849 - __main__ - INFO - Deleted old menu message ID: 71
+2025-07-06 23:19:42,917 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/sendMessage "HTTP/1.1 200 OK"
+2025-07-06 23:19:42,921 - __main__ - INFO - Created new menu message with ID: 72
+2025-07-06 23:19:46,461 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 23:19:46,465 - __main__ - INFO - ACTION: button_handler | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Button pressed: day_1
+2025-07-06 23:19:46,498 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/answerCallbackQuery "HTTP/1.1 200 OK"
+2025-07-06 23:19:46,498 - __main__ - INFO - ACTION: show_forecast_types | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Day selected: 1 (Morgen)
+2025-07-06 23:19:46,499 - __main__ - INFO - Available forecast types for day 1: ['flugdistanz', 'thermikkarte', 'wolkenverteilung', 'ortsvorhersage', 'pfd_summary']
+2025-07-06 23:19:46,499 - __main__ - INFO - Updating menu message. Old ID: 72, Chat ID: 847500265
+2025-07-06 23:19:46,532 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/deleteMessage "HTTP/1.1 200 OK"
+2025-07-06 23:19:46,533 - __main__ - INFO - Deleted old menu message ID: 72
+2025-07-06 23:19:46,583 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/sendMessage "HTTP/1.1 200 OK"
+2025-07-06 23:19:46,588 - __main__ - INFO - Created new menu message with ID: 73
+2025-07-06 23:19:50,061 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 23:19:50,065 - __main__ - INFO - ACTION: button_handler | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Button pressed: type_1_flugdistanz
+2025-07-06 23:19:50,098 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/answerCallbackQuery "HTTP/1.1 200 OK"
+2025-07-06 23:19:50,098 - __main__ - INFO - ACTION: show_hours_or_send_flugdistanz | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Forecast type selected: flugdistanz for day 1
+2025-07-06 23:19:50,098 - __main__ - INFO - Sending flugdistanz directly for day 1
+2025-07-06 23:19:50,098 - __main__ - INFO - ACTION: send_flugdistanz_image | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Attempting to send Flugdistanz for day 1
+2025-07-06 23:19:50,254 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/sendPhoto "HTTP/1.1 200 OK"
+2025-07-06 23:19:50,257 - __main__ - INFO - Successfully sent Flugdistanz image for day 1
+2025-07-06 23:19:50,258 - __main__ - INFO - Updating menu message. Old ID: 73, Chat ID: 847500265
+2025-07-06 23:19:50,322 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/deleteMessage "HTTP/1.1 200 OK"
+2025-07-06 23:19:50,323 - __main__ - INFO - Deleted old menu message ID: 73
+2025-07-06 23:19:50,396 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/sendMessage "HTTP/1.1 200 OK"
+2025-07-06 23:19:50,397 - __main__ - INFO - Created new menu message with ID: 75
+2025-07-06 23:19:54,813 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 23:19:54,818 - __main__ - INFO - ACTION: button_handler | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Button pressed: show_forecast
+2025-07-06 23:19:54,934 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/answerCallbackQuery "HTTP/1.1 200 OK"
+2025-07-06 23:19:54,936 - __main__ - INFO - ACTION: show_days | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Callback query: show_forecast
+2025-07-06 23:19:54,937 - __main__ - INFO - Available days found: [0, 1, 2, 3, 4, 5]
+2025-07-06 23:19:54,938 - __main__ - INFO - Updating menu message. Old ID: 75, Chat ID: 847500265
+2025-07-06 23:19:55,030 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/deleteMessage "HTTP/1.1 200 OK"
+2025-07-06 23:19:55,032 - __main__ - INFO - Deleted old menu message ID: 75
+2025-07-06 23:19:55,155 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/sendMessage "HTTP/1.1 200 OK"
+2025-07-06 23:19:55,160 - __main__ - INFO - Created new menu message with ID: 76
+2025-07-06 23:19:57,592 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 23:19:57,596 - __main__ - INFO - ACTION: button_handler | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Button pressed: day_5
+2025-07-06 23:19:57,665 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/answerCallbackQuery "HTTP/1.1 200 OK"
+2025-07-06 23:19:57,667 - __main__ - INFO - ACTION: show_forecast_types | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Day selected: 5 (Friday, 11.07)
+2025-07-06 23:19:57,668 - __main__ - INFO - Available forecast types for day 5: ['flugdistanz', 'thermikkarte', 'wolkenverteilung', 'ortsvorhersage', 'pfd_summary']
+2025-07-06 23:19:57,668 - __main__ - INFO - Updating menu message. Old ID: 76, Chat ID: 847500265
+2025-07-06 23:19:57,781 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/deleteMessage "HTTP/1.1 200 OK"
+2025-07-06 23:19:57,783 - __main__ - INFO - Deleted old menu message ID: 76
+2025-07-06 23:19:57,888 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/sendMessage "HTTP/1.1 200 OK"
+2025-07-06 23:19:57,889 - __main__ - INFO - Created new menu message with ID: 77
+2025-07-06 23:19:59,810 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 23:19:59,815 - __main__ - INFO - ACTION: button_handler | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Button pressed: type_5_ortsvorhersage
+2025-07-06 23:19:59,845 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/answerCallbackQuery "HTTP/1.1 200 OK"
+2025-07-06 23:19:59,846 - __main__ - INFO - ACTION: show_hours_or_send_flugdistanz | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Forecast type selected: ortsvorhersage for day 5
+2025-07-06 23:19:59,846 - __main__ - INFO - Sending ortsvorhersage directly for day 5
+2025-07-06 23:19:59,846 - __main__ - INFO - ACTION: send_ortsvorhersage_image | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Attempting to send Ortsvorhersage for day 5
+2025-07-06 23:20:00,331 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/sendPhoto "HTTP/1.1 200 OK"
+2025-07-06 23:20:00,334 - __main__ - INFO - Successfully sent Ortsvorhersage image for day 5
+2025-07-06 23:20:00,334 - __main__ - INFO - Updating menu message. Old ID: 77, Chat ID: 847500265
+2025-07-06 23:20:00,368 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/deleteMessage "HTTP/1.1 200 OK"
+2025-07-06 23:20:00,368 - __main__ - INFO - Deleted old menu message ID: 77
+2025-07-06 23:20:00,414 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/sendMessage "HTTP/1.1 200 OK"
+2025-07-06 23:20:00,415 - __main__ - INFO - Created new menu message with ID: 79
+2025-07-06 23:20:02,791 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 23:20:02,795 - __main__ - INFO - ACTION: button_handler | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Button pressed: day_5
+2025-07-06 23:20:02,826 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/answerCallbackQuery "HTTP/1.1 200 OK"
+2025-07-06 23:20:02,828 - __main__ - INFO - ACTION: show_forecast_types | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Day selected: 5 (Friday, 11.07)
+2025-07-06 23:20:02,829 - __main__ - INFO - Available forecast types for day 5: ['flugdistanz', 'thermikkarte', 'wolkenverteilung', 'ortsvorhersage', 'pfd_summary']
+2025-07-06 23:20:02,830 - __main__ - INFO - Updating menu message. Old ID: 79, Chat ID: 847500265
+2025-07-06 23:20:02,862 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/deleteMessage "HTTP/1.1 200 OK"
+2025-07-06 23:20:02,863 - __main__ - INFO - Deleted old menu message ID: 79
+2025-07-06 23:20:02,908 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/sendMessage "HTTP/1.1 200 OK"
+2025-07-06 23:20:02,910 - __main__ - INFO - Created new menu message with ID: 80
+2025-07-06 23:20:04,050 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 23:20:04,055 - __main__ - INFO - ACTION: button_handler | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Button pressed: type_5_pfd_summary
+2025-07-06 23:20:04,089 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/answerCallbackQuery "HTTP/1.1 200 OK"
+2025-07-06 23:20:04,091 - __main__ - INFO - ACTION: show_hours_or_send_flugdistanz | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Forecast type selected: pfd_summary for day 5
+2025-07-06 23:20:04,091 - __main__ - INFO - Sending PFD summary directly
+2025-07-06 23:20:04,091 - __main__ - INFO - ACTION: send_pfd_summary | User ID: 847500265, Username: RobRob007, First Name: Robin | Chat ID: 847500265, Chat Type: private | Details: Sending PFD 18m-Klasse summary
+2025-07-06 23:20:04,141 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/sendMessage "HTTP/1.1 200 OK"
+2025-07-06 23:20:04,144 - __main__ - INFO - Successfully sent PFD 18m-Klasse summary
+2025-07-06 23:20:04,145 - __main__ - INFO - Updating menu message. Old ID: 80, Chat ID: 847500265
+2025-07-06 23:20:04,185 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/deleteMessage "HTTP/1.1 200 OK"
+2025-07-06 23:20:04,185 - __main__ - INFO - Deleted old menu message ID: 80
+2025-07-06 23:20:04,252 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/sendMessage "HTTP/1.1 200 OK"
+2025-07-06 23:20:04,254 - __main__ - INFO - Created new menu message with ID: 82
+2025-07-06 23:20:14,085 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 23:20:21,818 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4/getUpdates "HTTP/1.1 200 OK"
+2025-07-06 23:20:21,819 - telegram.ext.Application - INFO - Application is stopping. This might take a moment.
+2025-07-06 23:20:21,819 - telegram.ext.Application - INFO - Application.stop() complete

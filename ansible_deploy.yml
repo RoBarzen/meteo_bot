@@ -1,0 +1,188 @@
+---
+- name: Deploy Meteo Bot System
+  hosts: meteo_bot
+  become: yes
+  vars:
+    meteo_bot_user: rob
+    meteo_bot_group: rob
+    meteo_bot_home: /opt/meteo_bot
+    python_version: "3.9"
+    
+  tasks:
+    - name: Update package cache
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
+
+    - name: Install system dependencies
+      apt:
+        name:
+          - python3
+          - python3-pip
+          - python3-venv
+          - chromium-browser
+          - chromium-chromedriver
+          - git
+          - curl
+          - wget
+          - unzip
+          - cron
+        state: present
+
+    - name: Create meteo bot directory structure
+      file:
+        path: "{{ item }}"
+        state: directory
+        owner: "{{ meteo_bot_user }}"
+        group: "{{ meteo_bot_group }}"
+        mode: '0755'
+      loop:
+        - "{{ meteo_bot_home }}"
+        - "{{ meteo_bot_home }}/logs"
+        - "{{ meteo_bot_home }}/data"
+        - "{{ meteo_bot_home }}/scripts"
+        - "{{ meteo_bot_home }}/config"
+
+    - name: Copy meteo crawler script
+      copy:
+        src: meteo_crawler.py
+        dest: "{{ meteo_bot_home }}/scripts/meteo_crawler.py"
+        owner: "{{ meteo_bot_user }}"
+        group: "{{ meteo_bot_group }}"
+        mode: '0755'
+
+    - name: Copy telegram bot script
+      copy:
+        src: telegram_bot.py
+        dest: "{{ meteo_bot_home }}/scripts/telegram_bot.py"
+        owner: "{{ meteo_bot_user }}"
+        group: "{{ meteo_bot_group }}"
+        mode: '0755'
+
+    - name: Copy requirements files
+      copy:
+        src: "{{ item }}"
+        dest: "{{ meteo_bot_home }}/{{ item }}"
+        owner: "{{ meteo_bot_user }}"
+        group: "{{ meteo_bot_group }}"
+        mode: '0644'
+      loop:
+        - requirements_telegram.txt
+        - README_telegram_bot.md
+
+    - name: Create Python virtual environment
+      pip:
+        name: virtualenv
+        state: present
+
+    - name: Create virtual environment for meteo bot
+      command: "python3 -m venv {{ meteo_bot_home }}/venv"
+      args:
+        creates: "{{ meteo_bot_home }}/venv/bin/activate"
+      become_user: "{{ meteo_bot_user }}"
+
+    - name: Install Python dependencies for crawler
+      pip:
+        requirements: "{{ meteo_bot_home }}/requirements_telegram.txt"
+        virtualenv: "{{ meteo_bot_home }}/venv"
+        virtualenv_command: python3 -m venv
+      become_user: "{{ meteo_bot_user }}"
+
+    - name: Install additional crawler dependencies
+      pip:
+        name:
+          - selenium
+          - requests
+          - webdriver-manager
+        virtualenv: "{{ meteo_bot_home }}/venv"
+        virtualenv_command: python3 -m venv
+      become_user: "{{ meteo_bot_user }}"
+
+    - name: Create configuration directory
+      file:
+        path: "{{ meteo_bot_home }}/config"
+        state: directory
+        owner: "{{ meteo_bot_user }}"
+        group: "{{ meteo_bot_group }}"
+        mode: '0755'
+
+    - name: Create environment file template
+      template:
+        src: env_template.j2
+        dest: "{{ meteo_bot_home }}/config/.env"
+        owner: "{{ meteo_bot_user }}"
+        group: "{{ meteo_bot_group }}"
+        mode: '0600'
+
+    - name: Create meteo crawler systemd service
+      template:
+        src: meteo_crawler.service.j2
+        dest: /etc/systemd/system/meteo-crawler.service
+        mode: '0644'
+      notify: reload systemd
+
+    - name: Create telegram bot systemd service
+      template:
+        src: telegram_bot.service.j2
+        dest: /etc/systemd/system/telegram-bot.service
+        mode: '0644'
+      notify: reload systemd
+
+    - name: Create meteo crawler cron job
+      cron:
+        name: "Meteo Crawler - Update forecasts every 2 hours"
+        minute: "0"
+        hour: "*/2"
+        job: "cd {{ meteo_bot_home }}/scripts && {{ meteo_bot_home }}/venv/bin/python meteo_crawler.py >> {{ meteo_bot_home }}/logs/crawler.log 2>&1"
+        user: "{{ meteo_bot_user }}"
+        state: present
+
+    - name: Create log rotation configuration
+      template:
+        src: logrotate.conf.j2
+        dest: /etc/logrotate.d/meteo-bot
+        mode: '0644'
+
+    - name: Create startup script
+      template:
+        src: startup.sh.j2
+        dest: "{{ meteo_bot_home }}/startup.sh"
+        owner: "{{ meteo_bot_user }}"
+        group: "{{ meteo_bot_group }}"
+        mode: '0755'
+
+    - name: Create data directories for each day
+      file:
+        path: "{{ meteo_bot_home }}/data/day{{ item }}"
+        state: directory
+        owner: "{{ meteo_bot_user }}"
+        group: "{{ meteo_bot_group }}"
+        mode: '0755'
+      loop: "{{ range(0, 6) | list }}"
+
+    - name: Set proper permissions on data directory
+      file:
+        path: "{{ meteo_bot_home }}/data"
+        state: directory
+        owner: "{{ meteo_bot_user }}"
+        group: "{{ meteo_bot_group }}"
+        mode: '0755'
+        recurse: yes
+
+    - name: Enable and start telegram bot service
+      systemd:
+        name: telegram-bot
+        enabled: yes
+        state: started
+        daemon_reload: yes
+
+    - name: Enable meteo crawler service (but don't start - it's cron-based)
+      systemd:
+        name: meteo-crawler
+        enabled: yes
+        daemon_reload: yes
+
+  handlers:
+    - name: reload systemd
+      systemd:
+        daemon_reload: yes 

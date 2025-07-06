@@ -1,0 +1,12 @@
+{{ meteo_bot_home }}/logs/*.log {
+    daily
+    missingok
+    rotate 30
+    compress
+    delaycompress
+    notifempty
+    create 644 {{ meteo_bot_user }} {{ meteo_bot_group }}
+    postrotate
+        systemctl reload telegram-bot > /dev/null 2>&1 || true
+    endscript
+} 

@@ -1,0 +1,24 @@
+[Unit]
+Description=TopMeteo Crawler
+After=network.target
+Wants=network.target
+
+[Service]
+Type=oneshot
+User={{ meteo_bot_user }}
+Group={{ meteo_bot_group }}
+WorkingDirectory={{ meteo_bot_home }}/scripts
+Environment=PATH={{ meteo_bot_home }}/venv/bin
+ExecStart={{ meteo_bot_home }}/venv/bin/python meteo_crawler.py
+StandardOutput=journal
+StandardError=journal
+
+# Security settings
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths={{ meteo_bot_home }}/data {{ meteo_bot_home }}/logs
+
+[Install]
+WantedBy=multi-user.target 
