@@ -1,23 +1,39 @@
 import os
 import logging
 import re
+import json
+from functools import wraps
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Application, CommandHandler, CallbackQueryHandler, ContextTypes
 from datetime import datetime, timedelta
 
 # --- CONFIGURATION ---
 BOT_TOKEN = '7511310203:AAFxn7ukc50zmD5c5Hcnufm_Br5EOGDP2S4'  # Replace with your bot token
+USERS_DB = '/opt/meteo_bot/data/users.json'
+ADMIN_USERNAME = 'RobRob007'
+ADMIN_CHAT_ID = 847500265  # Replace with your actual Telegram user ID
+
+USER_LOG_FILE = '/opt/meteo_bot/logs/user_interactions.log'
+
+user_logger = logging.getLogger("user_interactions")
+user_logger.setLevel(logging.INFO)
+user_handler = logging.FileHandler(USER_LOG_FILE)
+user_handler.setFormatter(logging.Formatter('%(asctime)s - %(message)s'))
+user_logger.addHandler(user_handler)
 
 # Enable logging
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     level=logging.INFO,
     handlers=[
-        logging.FileHandler('bot_interactions.log'),
+        logging.FileHandler('/opt/meteo_bot/logs/bot_interactions.log'),
         logging.StreamHandler()
     ]
 )
 logger = logging.getLogger(__name__)
+
+# Suppress httpx info logs
+logging.getLogger("httpx").setLevel(logging.WARNING)
 
 # Forecast types mapping
 FORECAST_TYPES = {
@@ -191,16 +207,60 @@ async def update_menu_message(context: ContextTypes.DEFAULT_TYPE, chat_id: int, 
         context.user_data['menu_message_id'] = message.message_id
         logger.info(f"Created fallback menu message with ID: {message.message_id}")
 
+def load_users():
+    try:
+        with open(USERS_DB, 'r') as f:
+            return json.load(f)
+    except Exception:
+        return {}
+
+def save_users(users):
+    with open(USERS_DB, 'w') as f:
+        json.dump(users, f, indent=2)
+
+def user_check(func):
+    @wraps(func)
+    async def wrapper(update, context, *args, **kwargs):
+        user = update.effective_user
+        users = load_users()
+        user_id = str(user.id)
+        if user_id not in users:
+            # Add as pending
+            users[user_id] = {
+                "username": user.username,
+                "first_name": user.first_name,
+                "status": "pending"
+            }
+            save_users(users)
+            # Notify admin
+            await context.bot.send_message(
+                chat_id=ADMIN_CHAT_ID,
+                text=f"New user request:\nUsername: @{user.username}\nFirst Name: {user.first_name}\nUser ID: {user_id}"
+            )
+            await update.message.reply_text("⏳ Deine Anfrage wurde zur Freischaltung an den Admin gesendet.")
+            return
+        elif users[user_id]["status"] == "pending":
+            await update.message.reply_text("⏳ Deine Anfrage ist noch in Bearbeitung.")
+            return
+        elif users[user_id]["status"] == "rejected":
+            await update.message.reply_text("❌ Deine Anfrage wurde abgelehnt.")
+            return
+        return await func(update, context, *args, **kwargs)
+    return wrapper
+
+@user_check
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Send welcome message when the command /start is issued."""
     log_user_action(update, "start_command", "User started the bot")
     await get_or_create_menu_message(update, context)
 
+@user_check
 async def forecast_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Handle /forecast command"""
     log_user_action(update, "forecast_command", "User requested forecast menu")
     await show_days(update, context)
 
+@user_check
 async def show_days(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Show available days"""
     query = update.callback_query
@@ -230,6 +290,7 @@ async def show_days(update: Update, context: ContextTypes.DEFAULT_TYPE):
     keyboard.append([InlineKeyboardButton("🔙 Hauptmenü", callback_data="main_menu")])
     await update_menu_message(context, update.effective_chat.id, text, keyboard)
 
+@user_check
 async def show_forecast_types(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Show available forecast types for a selected day"""
     query = update.callback_query
@@ -262,6 +323,7 @@ async def show_forecast_types(update: Update, context: ContextTypes.DEFAULT_TYPE
     keyboard.append([InlineKeyboardButton("🔙 Zurück zu Tagen", callback_data="show_days")])
     await update_menu_message(context, update.effective_chat.id, text, keyboard)
 
+@user_check
 async def show_hours_or_send_flugdistanz(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Show available hours for hourly forecasts, or directly send Flugdistanz/Ortsvorhersage"""
     query = update.callback_query
@@ -324,6 +386,7 @@ async def show_hours_or_send_flugdistanz(update: Update, context: ContextTypes.D
     keyboard.append([InlineKeyboardButton("🔙 Zurück", callback_data=f"day_{day_num}")])
     await update_menu_message(context, update.effective_chat.id, text, keyboard)
 
+@user_check
 async def send_flugdistanz_image(update: Update, context: ContextTypes.DEFAULT_TYPE, day_num):
     """Send Flugdistanz image directly (no hour selection needed)"""
     query = update.callback_query
@@ -374,6 +437,7 @@ async def send_flugdistanz_image(update: Update, context: ContextTypes.DEFAULT_T
         keyboard = [[InlineKeyboardButton("🔙 Zurück", callback_data=f"day_{day_num}")]]
         await update_menu_message(context, update.effective_chat.id, text, keyboard)
 
+@user_check
 async def send_ortsvorhersage_image(update: Update, context: ContextTypes.DEFAULT_TYPE, day_num):
     """Send Ortsvorhersage image directly (no hour selection needed)"""
     query = update.callback_query
@@ -424,6 +488,7 @@ async def send_ortsvorhersage_image(update: Update, context: ContextTypes.DEFAUL
         keyboard = [[InlineKeyboardButton("🔙 Zurück", callback_data=f"day_{day_num}")]]
         await update_menu_message(context, update.effective_chat.id, text, keyboard)
 
+@user_check
 async def send_forecast_image(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Send the selected forecast image (for hourly forecasts)"""
     query = update.callback_query
@@ -435,6 +500,12 @@ async def send_forecast_image(update: Update, context: ContextTypes.DEFAULT_TYPE
     
     day_name = get_day_name(day_num)
     forecast_name = FORECAST_TYPES[forecast_type]
+    
+    log_user_forecast_action(
+        update.effective_user,
+        f"{forecast_type} forecast",
+        f"Day: {day_num}, Hour: {hour}"
+    )
     
     log_user_action(update, "send_forecast_image", f"Attempting to send {forecast_type} for day {day_num} hour {hour}")
     
@@ -479,6 +550,7 @@ async def send_forecast_image(update: Update, context: ContextTypes.DEFAULT_TYPE
         keyboard = [[InlineKeyboardButton("🔙 Zurück", callback_data=f"type_{day_num}_{forecast_type}")]]
         await update_menu_message(context, update.effective_chat.id, text, keyboard)
 
+@user_check
 async def main_menu(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Return to main menu"""
     query = update.callback_query
@@ -506,6 +578,7 @@ Verwende /forecast um eine Vorhersage auszuwählen.
     ]
     await update_menu_message(context, update.effective_chat.id, welcome_text, keyboard)
 
+@user_check
 async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Handle button callbacks"""
     query = update.callback_query
@@ -522,6 +595,10 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await show_hours_or_send_flugdistanz(update, context)
     elif query.data.startswith("hour_"):
         await send_forecast_image(update, context)
+    elif query.data == "pfd_summary":
+        await send_pfd_summary(update, context)
+    elif query.data.startswith("approve_") or query.data.startswith("reject_"):
+        await admin_callback(update, context)
     else:
         logger.warning(f"Unknown callback data: {query.data}")
 
@@ -591,6 +668,7 @@ def get_pfd_summary():
     
     return "\n".join(summary_lines)
 
+@user_check
 async def send_pfd_summary(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Send PFD 18m-Klasse summary as text message"""
     query = update.callback_query
@@ -624,6 +702,52 @@ async def send_pfd_summary(update: Update, context: ContextTypes.DEFAULT_TYPE):
         keyboard = [[InlineKeyboardButton("🔙 Zurück", callback_data="show_forecast")]]
         await update_menu_message(context, update.effective_chat.id, text, keyboard)
 
+@user_check
+async def admin(update, context):
+    user = update.effective_user
+    if user.username != ADMIN_USERNAME:
+        await update.message.reply_text("❌ Keine Berechtigung.")
+        return
+    users = load_users()
+    pending = [u for u in users if users[u]["status"] == "pending"]
+    if not pending:
+        await update.message.reply_text("Keine offenen Anfragen.")
+        return
+    for uid in pending:
+        info = users[uid]
+        keyboard = [
+            [
+                InlineKeyboardButton("✅ Freigeben", callback_data=f"approve_{uid}"),
+                InlineKeyboardButton("❌ Ablehnen", callback_data=f"reject_{uid}")
+            ]
+        ]
+        await update.message.reply_text(
+            f"Anfrage von @{info['username']} ({info['first_name']}, ID: {uid})",
+            reply_markup=InlineKeyboardMarkup(keyboard)
+        )
+
+async def admin_callback(update, context):
+    query = update.callback_query
+    data = query.data
+    users = load_users()
+    if data.startswith("approve_"):
+        uid = data.split("_")[1]
+        users[uid]["status"] = "approved"
+        save_users(users)
+        await query.answer("User freigegeben!")
+        await context.bot.send_message(chat_id=uid, text="✅ Du wurdest freigeschaltet!")
+    elif data.startswith("reject_"):
+        uid = data.split("_")[1]
+        users[uid]["status"] = "rejected"
+        save_users(users)
+        await query.answer("User abgelehnt!")
+        await context.bot.send_message(chat_id=uid, text="❌ Deine Anfrage wurde abgelehnt.")
+
+def log_user_forecast_action(user, action, details=""):
+    user_logger.info(
+        f"User ID: {user.id}, Username: {user.username}, First Name: {user.first_name} | ACTION: {action} | {details}"
+    )
+
 def main():
     """Start the bot."""
     logger.info("Starting TopMeteo Forecast Bot")
@@ -635,6 +759,7 @@ def main():
     application.add_handler(CommandHandler("start", start))
     application.add_handler(CommandHandler("forecast", forecast_command))
     application.add_handler(CallbackQueryHandler(button_handler))
+    application.add_handler(CommandHandler("admin", admin))
 
     logger.info("Bot handlers registered, starting polling...")
     

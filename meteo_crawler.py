@@ -8,10 +8,11 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import requests
 from datetime import datetime, timedelta
+import logging
 
 # --- CONFIGURATION ---
 USERNAME = 'robby'
-PASSWORD = 'Lillyba1'
+PASSWORD = 'Waschllappen1+'
 LOGIN_URL = 'https://vfr.topmeteo.eu/de/de/login/'
 FORECAST_URL = 'https://vfr.topmeteo.eu/de/de/map/28/1/10/'
 OUTPUT_IMAGE = 'forecast.png'
@@ -49,7 +50,7 @@ def extract_pfd_data(driver):
     """Extract PFD 18m-Klasse [km] data from the Ortsvorhersage page"""
     try:
         # Wait for the page to fully load
-        time.sleep(5)
+        time.sleep(2)
         print("Starting PFD data extraction...")
         
         # Debug: Print page title to confirm we're on the right page
@@ -241,175 +242,353 @@ def extract_pfd_data(driver):
         print(f"Error in extract_pfd_data: {e}")
         return f"Error extracting PFD data: {str(e)}"
 
-# Path to chromedriver (ensure it's in your PATH or specify full path)
-driver = webdriver.Chrome(options=chrome_options)
-wait = WebDriverWait(driver, 20)
-
-try:
-    # 1. Go to login page
-    driver.get(LOGIN_URL)
+def setup_logging():
+    """Setup logging configuration"""
+    log_dir = 'logs'
+    if not os.path.exists(log_dir):
+        os.makedirs(log_dir)
     
-    # 2. Fill in login form
-    username_input = wait.until(EC.presence_of_element_located((By.ID, 'id_username')))
-    password_input = driver.find_element(By.ID, 'id_password')
-    username_input.send_keys(USERNAME)
-    password_input.send_keys(PASSWORD)
-    password_input.send_keys(Keys.RETURN)
+    log_file = os.path.join(log_dir, 'crawler.log')
+    
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s - %(levelname)s - %(message)s',
+        handlers=[
+            logging.FileHandler('/opt/meteo_bot/logs/bot_interactions.log'),
+            logging.StreamHandler()
+        ]
+    )
 
-    # 3. Wait for login to complete (check for absence of login form)
-    time.sleep(2)
-    login_form_present = True
+def setup_driver():
+    from selenium.webdriver.chrome.options import Options as ChromeOptions
+    from selenium.webdriver.chrome.service import Service as ChromeService
+    from selenium import webdriver
+
+    chrome_options = ChromeOptions()
+    chrome_options.add_argument('--headless')
+    chrome_options.add_argument('--no-sandbox')
+    chrome_options.add_argument('--disable-dev-shm-usage')
+    chrome_options.add_argument('--disable-gpu')
+    chrome_options.add_argument('--window-size=1920,1080')
+
+    # Use system chromedriver
+    service = ChromeService('/usr/bin/chromedriver')
+    driver = webdriver.Chrome(service=service, options=chrome_options)
+    driver.set_page_load_timeout(30)
+    return driver
+
+def login_to_topmeteo(driver):
+    """Login to TopMeteo and return True if successful"""
     try:
-        driver.find_element(By.ID, 'id_username')
-        driver.find_element(By.ID, 'id_password')
+        # 1. Go to login page
+        driver.get(LOGIN_URL)
+        
+        # 2. Fill in login form
+        wait = WebDriverWait(driver, 20)
+        username_input = wait.until(EC.presence_of_element_located((By.ID, 'id_username')))
+        password_input = driver.find_element(By.ID, 'id_password')
+        username_input.send_keys(USERNAME)
+        password_input.send_keys(PASSWORD)
+        password_input.send_keys(Keys.RETURN)
+
+        # 3. Wait for login to complete (check for absence of login form)
+        time.sleep(2)
         login_form_present = True
-    except:
-        login_form_present = False
+        try:
+            driver.find_element(By.ID, 'id_username')
+            driver.find_element(By.ID, 'id_password')
+            login_form_present = True
+        except:
+            login_form_present = False
 
-    # Check for login error message
-    error_message = None
+        # Check for login error message
+        error_message = None
+        try:
+            error_message = driver.find_element(By.CLASS_NAME, 'errorlist').text
+        except:
+            pass
+
+        if login_form_present:
+            print("Login failed! Please check your credentials or site availability.")
+            if error_message:
+                print(f"Error message: {error_message}")
+            return False
+        else:
+            print("Login successful!")
+            return True
+    except Exception as e:
+        print(f"Error logging in: {e}")
+        return False
+
+def download_flugdistanz(driver, day):
+    """Download Flugdistanz forecast for a given day"""
     try:
-        error_message = driver.find_element(By.CLASS_NAME, 'errorlist').text
-    except:
-        pass
-
-    if login_form_present:
-        print("Login failed! Please check your credentials or site availability.")
-        if error_message:
-            print(f"Error message: {error_message}")
-        driver.quit()
-        exit(1)
-    else:
-        print("Login successful!")
-
-    # Get current forecast update time
-    forecast_update_time = get_forecast_update_time()
-    print(f"Current forecast update cycle: {forecast_update_time.strftime('%Y-%m-%d %H:%M UTC')}")
-
-    # 4. Download forecast images for multiple products and days 0 to 5
-    products = [
-        (28, 'flugdistanz', [10]),  # Flugdistanz only at 10 UTC
-        (24, 'thermikkarte', range(6, 19)),  # Thermikkarte from 6-18 UTC
-        (26, 'wolkenverteilung', range(6, 19)),  # Wolkenverteilung from 6-18 UTC
-    ]
-    
-    # Download Ortsvorhersage for Langenfeld (local forecast)
-    langenfeld_id = '315181'  # Langenfeld location ID
-    for day in range(0, 6):
         # Create directory for this day
         day_dir = f'day{day}'
         if not os.path.exists(day_dir):
             os.makedirs(day_dir)
             print(f"Created directory: {day_dir}")
         
-        # Check if Ortsvorhersage file already exists and is recent
-        ortsvorhersage_file = os.path.join(day_dir, f'forecast_ortsvorhersage_day{day}.png')
-        if should_download_file(ortsvorhersage_file):
-            # Ortsvorhersage URL structure: /de/de/loc/{location_id}/{day}/3/1/1/
-            # The parameters are: day, start_hour=3, resolution=1, forecast_type=1
-            url = f'https://vfr.topmeteo.eu/de/de/loc/{langenfeld_id}/{day}/3/1/1/'
-            print(f"Processing Ortsvorhersage for Langenfeld day {day}: {url}")
+        # Flugdistanz only at 10 UTC
+        hour = 10
+        forecast_file = os.path.join(day_dir, f'forecast_flugdistanz_day{day}_hour{hour:02d}.png')
+        
+        if should_download_file(forecast_file):
+            url = f'https://vfr.topmeteo.eu/de/de/map/28/{day}/{hour}/'
+            print(f"Processing Flugdistanz for day {day} at {hour} UTC: {url}")
             driver.get(url)
-            time.sleep(5)  # Wait for JS to load content
-            
-            # Take screenshot of the Ortsvorhersage page
+            time.sleep(2)  # Wait for JS to load image
+
+            # Find the forecast image inside the projection-map-image container
+            forecast_img_url = None
             try:
-                # Find the main content area for the forecast
-                forecast_container = driver.find_element(By.CLASS_NAME, 'location-forecast')
-                if forecast_container:
-                    # Set window size to ensure good quality
-                    driver.set_window_size(1920, 1080)
-                    time.sleep(2)  # Wait for resize to complete
-                    
-                    # Scroll to the forecast container to ensure it's visible
-                    driver.execute_script("arguments[0].scrollIntoView();", forecast_container)
-                    time.sleep(1)
-                    
-                    # Take screenshot of the specific forecast container
-                    forecast_container.screenshot(ortsvorhersage_file)
-                    print(f"Ortsvorhersage for Langenfeld day {day} saved as {ortsvorhersage_file}")
-                    
-                    # Extract PFD 18m-Klasse data
-                    try:
-                        # Look for PFD 18m-Klasse data in the page
-                        pfd_data = extract_pfd_data(driver)
-                        if pfd_data:
-                            pfd_file = os.path.join(day_dir, f'pfd_18m_day{day}.txt')
-                            with open(pfd_file, 'w', encoding='utf-8') as f:
-                                f.write(pfd_data)
-                            print(f"PFD 18m-Klasse data for day {day} saved as {pfd_file}")
-                        else:
-                            print(f"No PFD 18m-Klasse data found for day {day}")
-                    except Exception as pfd_e:
-                        print(f"Could not extract PFD data for day {day}: {pfd_e}")
-                        
-                else:
-                    print(f"Could not find Ortsvorhersage content for day {day}")
+                map_container = driver.find_element(By.ID, 'projection-map-image')
+                img = map_container.find_element(By.TAG_NAME, 'img')
+                forecast_img_url = img.get_attribute('src')
             except Exception as e:
-                print(f"Could not capture Ortsvorhersage for day {day}: {e}")
-                # Fallback: try to take full page screenshot
-                try:
-                    driver.save_screenshot(ortsvorhersage_file)
-                    print(f"Fallback: Full page screenshot saved for day {day}")
-                except Exception as fallback_e:
-                    print(f"Fallback screenshot also failed for day {day}: {fallback_e}")
+                print(f"Could not find forecast image for Flugdistanz day {day} hour {hour}: {e}")
+                return
+
+            if not forecast_img_url:
+                print(f"Forecast image not found for Flugdistanz day {day} hour {hour}!")
+                return
+
+            # If the src is a relative path, prepend the base URL
+            if forecast_img_url.startswith('./'):
+                forecast_img_url = 'https://vfr.topmeteo.eu' + forecast_img_url[1:]
+            elif forecast_img_url.startswith('/'):
+                forecast_img_url = 'https://vfr.topmeteo.eu' + forecast_img_url
+
+            # Download the image using requests (with session cookies)
+            session = requests.Session()
+            for cookie in driver.get_cookies():
+                session.cookies.set(cookie['name'], cookie['value'])
+            response = session.get(forecast_img_url)
+            if response.status_code == 200:
+                with open(forecast_file, 'wb') as f:
+                    f.write(response.content)
+                print(f"Forecast image for Flugdistanz day {day} hour {hour} saved as {forecast_file}")
+            else:
+                print(f"Failed to download image for Flugdistanz day {day} hour {hour}: {response.status_code}")
         else:
-            print(f"Ortsvorhersage for day {day} already exists and is recent, skipping...")
-    
-    # Download regular forecast images
-    for product_id, product_name, hours in products:
-        for day in range(0, 6):
-            # Create directory for this day (already created above, but check again)
-            day_dir = f'day{day}'
-            if not os.path.exists(day_dir):
-                os.makedirs(day_dir)
-                print(f"Created directory: {day_dir}")
+            print(f"Forecast for Flugdistanz day {day} hour {hour} already exists and is recent, skipping...")
+    except Exception as e:
+        print(f"Error downloading Flugdistanz for day {day}: {e}")
+
+def download_thermikkarte(driver, day):
+    """Download Thermikkarte forecast for a given day"""
+    try:
+        # Create directory for this day
+        day_dir = f'day{day}'
+        if not os.path.exists(day_dir):
+            os.makedirs(day_dir)
+            print(f"Created directory: {day_dir}")
+        
+        # Thermikkarte from 6-18 UTC
+        for hour in range(6, 19):
+            forecast_file = os.path.join(day_dir, f'forecast_thermikkarte_day{day}_hour{hour:02d}.png')
             
-            for hour in hours:
-                # Check if file already exists and is recent
-                forecast_file = os.path.join(day_dir, f'forecast_{product_name}_day{day}_hour{hour:02d}.png')
-                if should_download_file(forecast_file):
-                    url = f'https://vfr.topmeteo.eu/de/de/map/{product_id}/{day}/{hour}/'
-                    print(f"Processing {product_name} for day {day} at {hour} UTC: {url}")
-                    driver.get(url)
-                    time.sleep(5)  # Wait for JS to load image
+            if should_download_file(forecast_file):
+                url = f'https://vfr.topmeteo.eu/de/de/map/24/{day}/{hour}/'
+                print(f"Processing Thermikkarte for day {day} at {hour} UTC: {url}")
+                driver.get(url)
+                time.sleep(2)  # Wait for JS to load image
 
-                    # Find the forecast image inside the projection-map-image container
-                    forecast_img_url = None
-                    try:
-                        map_container = driver.find_element(By.ID, 'projection-map-image')
-                        img = map_container.find_element(By.TAG_NAME, 'img')
-                        forecast_img_url = img.get_attribute('src')
-                    except Exception as e:
-                        print(f"Could not find forecast image for {product_name} day {day} hour {hour}: {e}")
-                        continue
+                # Find the forecast image inside the projection-map-image container
+                forecast_img_url = None
+                try:
+                    map_container = driver.find_element(By.ID, 'projection-map-image')
+                    img = map_container.find_element(By.TAG_NAME, 'img')
+                    forecast_img_url = img.get_attribute('src')
+                except Exception as e:
+                    print(f"Could not find forecast image for Thermikkarte day {day} hour {hour}: {e}")
+                    continue
 
-                    if not forecast_img_url:
-                        print(f"Forecast image not found for {product_name} day {day} hour {hour}!")
-                        continue
+                if not forecast_img_url:
+                    print(f"Forecast image not found for Thermikkarte day {day} hour {hour}!")
+                    continue
 
-                    # If the src is a relative path, prepend the base URL
-                    if forecast_img_url.startswith('./'):
-                        forecast_img_url = 'https://vfr.topmeteo.eu' + forecast_img_url[1:]
-                    elif forecast_img_url.startswith('/'):
-                        forecast_img_url = 'https://vfr.topmeteo.eu' + forecast_img_url
+                # If the src is a relative path, prepend the base URL
+                if forecast_img_url.startswith('./'):
+                    forecast_img_url = 'https://vfr.topmeteo.eu' + forecast_img_url[1:]
+                elif forecast_img_url.startswith('/'):
+                    forecast_img_url = 'https://vfr.topmeteo.eu' + forecast_img_url
 
-                    # Download the image using requests (with session cookies)
-                    session = requests.Session()
-                    for cookie in driver.get_cookies():
-                        session.cookies.set(cookie['name'], cookie['value'])
-                    response = session.get(forecast_img_url)
-                    if response.status_code == 200:
-                        with open(forecast_file, 'wb') as f:
-                            f.write(response.content)
-                        print(f"Forecast image for {product_name} day {day} hour {hour} saved as {forecast_file}")
-                    else:
-                        print(f"Failed to download image for {product_name} day {day} hour {hour}: {response.status_code}")
+                # Download the image using requests (with session cookies)
+                session = requests.Session()
+                for cookie in driver.get_cookies():
+                    session.cookies.set(cookie['name'], cookie['value'])
+                response = session.get(forecast_img_url)
+                if response.status_code == 200:
+                    with open(forecast_file, 'wb') as f:
+                        f.write(response.content)
+                    print(f"Forecast image for Thermikkarte day {day} hour {hour} saved as {forecast_file}")
                 else:
-                    print(f"Forecast for {product_name} day {day} hour {hour} already exists and is recent, skipping...")
+                    print(f"Failed to download image for Thermikkarte day {day} hour {hour}: {response.status_code}")
+            else:
+                print(f"Forecast for Thermikkarte day {day} hour {hour} already exists and is recent, skipping...")
+    except Exception as e:
+        print(f"Error downloading Thermikkarte for day {day}: {e}")
 
-    print(f"\nForecast update completed at {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
-    print("Next forecast update will be available in approximately 2 hours.")
+def download_wolkenverteilung(driver, day):
+    """Download Wolkenverteilung forecast for a given day"""
+    try:
+        # Create directory for this day
+        day_dir = f'day{day}'
+        if not os.path.exists(day_dir):
+            os.makedirs(day_dir)
+            print(f"Created directory: {day_dir}")
+        
+        # Wolkenverteilung from 6-18 UTC
+        for hour in range(6, 19):
+            forecast_file = os.path.join(day_dir, f'forecast_wolkenverteilung_day{day}_hour{hour:02d}.png')
+            
+            if should_download_file(forecast_file):
+                url = f'https://vfr.topmeteo.eu/de/de/map/26/{day}/{hour}/'
+                print(f"Processing Wolkenverteilung for day {day} at {hour} UTC: {url}")
+                driver.get(url)
+                time.sleep(2)  # Wait for JS to load image
+
+                # Find the forecast image inside the projection-map-image container
+                forecast_img_url = None
+                try:
+                    map_container = driver.find_element(By.ID, 'projection-map-image')
+                    img = map_container.find_element(By.TAG_NAME, 'img')
+                    forecast_img_url = img.get_attribute('src')
+                except Exception as e:
+                    print(f"Could not find forecast image for Wolkenverteilung day {day} hour {hour}: {e}")
+                    continue
+
+                if not forecast_img_url:
+                    print(f"Forecast image not found for Wolkenverteilung day {day} hour {hour}!")
+                    continue
+
+                # If the src is a relative path, prepend the base URL
+                if forecast_img_url.startswith('./'):
+                    forecast_img_url = 'https://vfr.topmeteo.eu' + forecast_img_url[1:]
+                elif forecast_img_url.startswith('/'):
+                    forecast_img_url = 'https://vfr.topmeteo.eu' + forecast_img_url
+
+                # Download the image using requests (with session cookies)
+                session = requests.Session()
+                for cookie in driver.get_cookies():
+                    session.cookies.set(cookie['name'], cookie['value'])
+                response = session.get(forecast_img_url)
+                if response.status_code == 200:
+                    with open(forecast_file, 'wb') as f:
+                        f.write(response.content)
+                    print(f"Forecast image for Wolkenverteilung day {day} hour {hour} saved as {forecast_file}")
+                else:
+                    print(f"Failed to download image for Wolkenverteilung day {day} hour {hour}: {response.status_code}")
+            else:
+                print(f"Forecast for Wolkenverteilung day {day} hour {hour} already exists and is recent, skipping...")
+    except Exception as e:
+        print(f"Error downloading Wolkenverteilung for day {day}: {e}")
+
+def download_ortsvorhersage(driver, day):
+    """Download Ortsvorhersage forecast for a given day"""
+    try:
+        # Ortsvorhersage URL structure: /de/de/loc/{location_id}/{day}/3/1/1/
+        # The parameters are: day, start_hour=3, resolution=1, forecast_type=1
+        langenfeld_id = '315181'  # Langenfeld location ID
+        url = f'https://vfr.topmeteo.eu/de/de/loc/{langenfeld_id}/{day}/3/1/1/'
+        print(f"Processing Ortsvorhersage for Langenfeld day {day}: {url}")
+        driver.get(url)
+        time.sleep(2)  # Wait for JS to load content
+        
+        # Take screenshot of the Ortsvorhersage page
+        ortsvorhersage_file = os.path.join(f'day{day}', f'forecast_ortsvorhersage_day{day}.png')
+        try:
+            # Find the main content area for the forecast
+            forecast_container = driver.find_element(By.CLASS_NAME, 'location-forecast')
+            if forecast_container:
+                # Set window size to ensure good quality
+                driver.set_window_size(1920, 1080)
+                time.sleep(2)  # Wait for resize to complete
+                
+                # Scroll to the forecast container to ensure it's visible
+                driver.execute_script("arguments[0].scrollIntoView();", forecast_container)
+                time.sleep(1)
+                
+                # Take screenshot of the specific forecast container
+                forecast_container.screenshot(ortsvorhersage_file)
+                print(f"Ortsvorhersage for Langenfeld day {day} saved as {ortsvorhersage_file}")
+                
+                # Extract PFD 18m-Klasse data
+                try:
+                    # Look for PFD 18m-Klasse data in the page
+                    pfd_data = extract_pfd_data(driver)
+                    if pfd_data:
+                        pfd_file = os.path.join(f'day{day}', f'pfd_18m_day{day}.txt')
+                        with open(pfd_file, 'w', encoding='utf-8') as f:
+                            f.write(pfd_data)
+                        print(f"PFD 18m-Klasse data for day {day} saved as {pfd_file}")
+                    else:
+                        print(f"No PFD 18m-Klasse data found for day {day}")
+                except Exception as pfd_e:
+                    print(f"Could not extract PFD data for day {day}: {pfd_e}")
+                    
+            else:
+                print(f"Could not find Ortsvorhersage content for day {day}")
+        except Exception as e:
+            print(f"Could not capture Ortsvorhersage for day {day}: {e}")
+            # Fallback: try to take full page screenshot
+            try:
+                driver.save_screenshot(ortsvorhersage_file)
+                print(f"Fallback: Full page screenshot saved for day {day}")
+            except Exception as fallback_e:
+                print(f"Fallback screenshot also failed for day {day}: {fallback_e}")
+    except Exception as e:
+        print(f"Error downloading Ortsvorhersage for day {day}: {e}")
+
+def main():
+    """Main function to run the meteo crawler"""
+    print("Starting TopMeteo Crawler...")
     
-finally:
-    driver.quit() 
+    # Setup logging
+    setup_logging()
+    
+    try:
+        # Setup webdriver
+        driver = setup_driver()
+        print("Webdriver setup successful")
+        
+        # Login to TopMeteo
+        if not login_to_topmeteo(driver):
+            print("Failed to login to TopMeteo")
+            return
+        
+        print("Login successful")
+        
+        # Process each day
+        for day in range(6):  # days 0-5
+            print(f"Processing day {day}...")
+            
+            # Download Flugdistanz
+            download_flugdistanz(driver, day)
+            
+            # Download Thermikkarte
+            download_thermikkarte(driver, day)
+            
+            # Download Wolkenverteilung
+            download_wolkenverteilung(driver, day)
+            
+            # Download Ortsvorhersage (includes PFD data extraction)
+            download_ortsvorhersage(driver, day)
+            
+            print(f"Day {day} processing completed")
+        
+        print("All days processed successfully!")
+        
+    except Exception as e:
+        print(f"Error in main function: {e}")
+        logging.error(f"Main function error: {e}")
+    finally:
+        try:
+            driver.quit()
+            print("Webdriver closed")
+        except:
+            pass
+
+if __name__ == "__main__":
+    main() 

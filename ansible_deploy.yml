@@ -20,6 +20,7 @@
           - python3
           - python3-pip
           - python3-venv
+          - python3-full
           - chromium-browser
           - chromium-chromedriver
           - git
@@ -27,6 +28,8 @@
           - wget
           - unzip
           - cron
+          - xvfb
+          - dbus-x11
         state: present
 
     - name: Create meteo bot directory structure
@@ -50,6 +53,7 @@
         owner: "{{ meteo_bot_user }}"
         group: "{{ meteo_bot_group }}"
         mode: '0755'
+      tags: scripts
 
     - name: Copy telegram bot script
       copy:
@@ -58,6 +62,8 @@
         owner: "{{ meteo_bot_user }}"
         group: "{{ meteo_bot_group }}"
         mode: '0755'
+      tags: scripts
+      notify: restart telegram bot
 
     - name: Copy requirements files
       copy:
@@ -69,11 +75,6 @@
       loop:
         - requirements_telegram.txt
         - README_telegram_bot.md
-
-    - name: Create Python virtual environment
-      pip:
-        name: virtualenv
-        state: present
 
     - name: Create virtual environment for meteo bot
       command: "python3 -m venv {{ meteo_bot_home }}/venv"
@@ -182,7 +183,34 @@
         enabled: yes
         daemon_reload: yes
 
+    - name: Check if users.json exists
+      stat:
+        path: /opt/meteo_bot/data/users.json
+      register: users_json_stat
+      tags: users
+
+    - name: Create initial users.json with admin user (if not exists)
+      copy:
+        dest: /opt/meteo_bot/data/users.json
+        content: |
+          {
+            "847500265": {
+              "username": "RobRob007",
+              "first_name": "Robin",
+              "status": "admin"
+            }
+          }
+        owner: rob
+        group: rob
+        mode: '0644'
+      when: not users_json_stat.stat.exists
+      tags: users
+
   handlers:
     - name: reload systemd
       systemd:
-        daemon_reload: yes 
+        daemon_reload: yes
+    - name: restart telegram bot
+      systemd:
+        name: telegram-bot
+        state: restarted 
